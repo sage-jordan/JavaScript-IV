@@ -31,7 +31,7 @@ class GameObject {
         this.dimensions = objAttr.dimensions;
     }
     destroy(){
-        return console.log(this.name + " was removed from the game.");
+        return `${this.name} was removed from the game.`;
     }
 }
 class CharacterStats extends GameObject{
@@ -40,7 +40,7 @@ class CharacterStats extends GameObject{
         this.healthPoints = stats.healthPoints;
     }
     takeDamage() {
-        return console.log(this.name + " took damage.");
+        return `${this.name} took damage.`;
     }
 }
 class Humanoid extends CharacterStats {
@@ -51,7 +51,7 @@ class Humanoid extends CharacterStats {
         this.language = human.language;
     }
     greet() {
-        return console.log(this.name + " offers a greeting in " + this.language);
+        return `${this.name} offers a greeting in ${this.language}`;
     }
 }
  
