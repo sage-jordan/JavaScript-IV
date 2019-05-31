@@ -54,7 +54,42 @@ class Humanoid extends CharacterStats {
         return `${this.name} offers a greeting in ${this.language}`;
     }
 }
- 
+class Villan extends Humanoid {
+    constructor(vilAttr){
+        super(vilAttr);
+    }
+    villanAttack(person){
+        if(person.healthPoints - 5 > 0){
+            var newHealth = person.healthPoints - 5;
+            person.healthPoints = newHealth;
+            return `${this.name} used his ${this.weapons[0]}!        ${person.name}'s healthpoints: ${person.healthPoints}`;
+        }else{
+            person.healthPoints = 0;
+            return `${this.name} used his ${this.weapons[0]}. ${person.name} died.      ${person.name}'s healthpoints: ${person.healthPoints}`;
+        }
+        
+    }
+}
+class Hero extends Humanoid {
+    constructor(heroAttr){
+        super(heroAttr);
+    }
+    heroAttack(person){
+        if(this.healthPoints === 0){
+            return `Hero is dead, cannot carryout attack.`;
+        }else{
+            if(person.healthPoints - 6 > 0){
+                var newHealth = person.healthPoints - 6;
+                person.healthPoints = newHealth;
+                return `${this.name} used ${this.weapons[0]}!       ${person.name}'s healthpoints: ${person.healthPoints}`;
+            }else{
+                person.healthPoints = 1;
+                return `${this.name} used ${this.weapons[0]}. ${person.name} has been spared.       ${person.name}'s healthpoints: ${person.healthPoints}`;
+            }
+        }
+    }
+}
+
     const mage = new Humanoid({
       createdAt: new Date(),
       dimensions: {
@@ -104,7 +139,39 @@ class Humanoid extends CharacterStats {
       ],
       language: 'Elvish',
     });
-  
+    
+    const kayne = new Villan({
+        createdAt: new Date(),
+        dimensions: {
+            length: 2,
+            width: 2,
+            height: 1
+        },
+        healthPoints: 15,
+        name: 'Kayne',
+        team: 'League of Legends',
+        weapons: [
+            'Scythe'
+        ],
+        language: 'English',
+    })
+
+    const luxHero = new Hero ({
+        createdAt: new Date(),
+        dimensions: {
+            length: 2,
+            width: 3,
+            height: 4
+        },
+        healthPoints: 15,
+        name: 'Lux',
+        team: 'LOL',
+        weapons: [
+            'Light Magic'
+        ],
+        language: 'English',
+    })
+
     console.log(mage.createdAt); // Today's date
     console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
     console.log(swordsman.healthPoints); // 15
@@ -121,3 +188,9 @@ class Humanoid extends CharacterStats {
     // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
     // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
     // * Create two new objects, one a villain and one a hero and fight it out with methods!
+console.log(kayne.villanAttack(luxHero));
+console.log(luxHero.heroAttack(kayne));
+console.log(kayne.villanAttack(luxHero));
+console.log(luxHero.heroAttack(kayne));
+console.log(kayne.villanAttack(luxHero));
+console.log(luxHero.heroAttack(kayne));
